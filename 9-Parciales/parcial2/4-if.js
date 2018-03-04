@@ -8,15 +8,17 @@ si la multiplicacion da unnum par mostrar es par*/
 	var numero1= prompt("ingrese numero");
 	var numero2= prompt("ingrese numero");
 	var resultado;
+
+	numero1=parseInt(numero1);
+	numero2=parseInt(numero2);
 	
  if(numero1==numero2)
 	{
-		resultado=numero1+numero2
+		resultado=numero1+""+numero2;
 		
 		
 	}else
-	{	numero1=parseInt(numero1);
-		numero2=parseInt(numero2);
+	{	
 		if(numero1>numero2)
 		{
 			resultado=numero1*numero2;
