@@ -84,7 +84,7 @@ function ComenzarIngreso ()
  	sueldoBruto= prompt("ingrese sueldo bruto")
  	sueldoBruto= parseInt(sueldoBruto);
 
- 	while(sueldoBruto<8000 && isNaN(sueldoBruto))
+ 	while(sueldoBruto<8000 || isNaN(sueldoBruto))
  	{
  		alert("sueldo insuficiente");
  		sueldoBruto= prompt("ingrese sueldo bruto")
