@@ -39,8 +39,15 @@ void alta(eProducto vec[],int tam,eProv prov[],int tamP)
         gets(nuevo.descripcion);
         printf("Ingrese importe\n");
         scanf("%f",&nuevo.Importe);
-        printf("ingrese stock\n");
-        scanf("%d",&nuevo.cantidad);
+
+        while (nuevo.Importe<=0)
+        {
+            printf("dato incorrecto");
+            system("cls");
+            printf("Ingrese importe\n");
+            scanf("%f",&nuevo.Importe);
+        }
+        nuevo.cantidad=validarCantidad();
         nuevo.idProv=pro(prov,5);
         vec[vacio]=nuevo;
     }
@@ -64,26 +71,27 @@ void modificar(eProducto vec[],int tam)
     int continuar;
     int codigo;
     int indice;
-    int confirma;
+    char confirma;
     int modifica;
     continuar=buscarAlta(vec,tam);
     if(continuar==-1)
     {
-        printf("para realiazar la accion debe primero dar de alta un producto");
+        printf("para realizar la accion debe primero dar de alta un producto\n");
     }
     else
     {
         printf("Ingrese codigo de producto: ");
         scanf("%d",&codigo);
         indice=buscarProducto(vec,tam,codigo);
-        if(indice=-1)
+        if(indice==-1)
         {
-            printf("no se encontro producto");
+            printf("no se encontro producto\n");
         }
         else
         {
           mostrarProducto(vec,indice);
-          printf("quiere modificar(s/n): ");
+          printf("\nquiere modificar(s/n): ");
+          fflush(stdin);
           scanf("%c",&confirma);
           if(confirma=='s')
           {
@@ -91,21 +99,29 @@ void modificar(eProducto vec[],int tam)
               do
                   {
                       system("cls");
-                  printf("1.DESCRIPCION\n2.IMPORTE\3.CANTIDAD\n4.SALIR");
-                    scanf("%d",modifica);
+                  printf("1.DESCRIPCION\n2.IMPORTE\n3.CANTIDAD\n4.SALIR\n");
+                    scanf("%d",&modifica);
                     switch(modifica)
                     {
                     case 1:
                         printf("Ingrese descripcion: ");
+                        fflush(stdin);
                         gets(vec[indice].descripcion);
                         break;
                     case 2:
-                            printf("Ingrese importe: ");
-                            scanf("%f",vec[indice].Importe);
+                            printf("Ingrese importe\n");
+                            scanf("%f",&vec[indice].Importe);
+
+                            while (vec[indice].Importe<=0)
+                            {
+                                printf("dato incorrecto");
+                                system("cls");
+                                printf("Ingrese importe\n");
+                                scanf("%f",&vec[indice].Importe);
+        }
                             break;
                     case 3:
-                            printf("ingrese stock: ");
-                            scanf("%d",vec[indice].cantidad);
+                            vec[indice].cantidad=validarCantidad();
                             break;
                     default:
                         salir=1;
@@ -117,7 +133,7 @@ void modificar(eProducto vec[],int tam)
           }
           else
           {
-              printf("operacion cancelada");
+              printf("operacion cancelada\n");
           }
 
         }
@@ -154,7 +170,7 @@ int buscarProducto (eProducto vec[],int tam,int codigo)
 void mostrarProducto (eProducto vec[],int j)
 {
     int i;
-    printf(" %d   %8s   %f   %d  %d",vec[j].codigo,vec[j].descripcion,vec[j].Importe,vec[j].cantidad,vec[j].idProv);
+    printf(" %d   %8s   %.2f   %d      %d",vec[j].codigo,vec[j].descripcion,vec[j].Importe,vec[j].cantidad,vec[j].idProv);
 
 }
 int pro(eProv vec[], int tam)
@@ -178,23 +194,27 @@ void baja(eProducto vec[],int tam)
     continuar=buscarAlta(vec,tam);
    if(continuar==-1)
     {
-        printf("para realiazar la accion debe primero dar de alta un producto");
+        printf("para realizar la accion debe primero dar de alta un producto\n");
     }
     else
     {
         printf("Ingrese codigo de producto: ");
         scanf("%d",&codigo);
         indice=buscarProducto(vec,tam,codigo);
-        if(indice=-1)
+        if(indice==-1)
         {
-            printf("no se encontro producto");
+            printf("no se encontro producto\n");
         }
         else
         {
-            printf("confirma bajas(s/n): ");
+            mostrarProducto(vec,indice);
+            printf("\nconfirma baja(s/n): ");
+            fflush(stdin);
+            scanf("%c",&confirma);
             if(confirma=='s')
             {
                 vec[indice].estado=1;
+                printf("Se realizo la baja\n");
             }
             else
                 {
@@ -226,12 +246,12 @@ void informar(eProducto vec[],int tam,eProv prov[],int tamP)
     printf("Total: %.2f\nPromedio: %.2f\n",suma,promedio);
     for(i=0;i<tam;i++)
     {
-        if(vec[i].Importe>suma&&vec[i].estado==0)
+        if(vec[i].Importe>promedio&&vec[i].estado==0)
         {
             supera++;
 
         }
-        if(vec[i].Importe<suma&&vec[i].estado==0)
+        if(vec[i].Importe<promedio&&vec[i].estado==0)
         {
             noSupera++;
         }
@@ -255,10 +275,50 @@ void informar(eProducto vec[],int tam,eProv prov[],int tamP)
 }
 void Listar (eProducto vec[],int tam,eProv prov[],int tamP)
 {
-    int i;
+    int i,j;
     float suma;
-    int acumular;
+    int acumular=0;
+    eProducto aux;
+
+    printf("A.\n");
+    for(i=0;i<tam-1;i++)
+    {
+        for(j=i+1;j<tam;j++)
+        {
+            if(vec[i].Importe<vec[j].Importe)
+            {
+                aux=vec[i];
+                vec[i]=vec[j];
+                vec[j]=aux;
+            }
+            else
+            {
+                if(vec[i].Importe==vec[j].Importe)
+                {
+                    if(strcmp (vec[i].descripcion,vec[j].descripcion)>0)
+                    {
+                        aux=vec[i];
+                        vec[i]=vec[j];
+                        vec[j]=aux;
+                    }
+                }
+            }
+        }
+    }
+    printf(" ID DESCRIPCION IMPORTE CANTIDAD PROVEEDOR\n\n");
+    for(i=0;i<tam;i++)
+    {
+        if(vec[i].estado==0)
+        {
+            mostrarProducto(vec,i);
+
+            printf( "\n\n");
+        }
+    }
+     system("pause");
+     system("cls");
     printf("B.\n");
+    printf(" ID DESCRIPCION IMPORTE CANTIDAD PROVEEDOR\n\n");
     for(i=0;i<tam;i++)
     {
         if(vec[i].cantidad<=10&&vec[i].estado==0)
@@ -267,7 +327,10 @@ void Listar (eProducto vec[],int tam,eProv prov[],int tamP)
             printf("\n\n");
         }
     }
+     system("pause");
+     system("cls");
     printf("C.\n");
+    printf(" ID DESCRIPCION IMPORTE CANTIDAD PROVEEDOR\n\n");
     for(i=0;i<tam;i++)
     {
         if(vec[i].cantidad>10&&vec[i].estado==0)
@@ -277,6 +340,7 @@ void Listar (eProducto vec[],int tam,eProv prov[],int tamP)
         }
     }
     float promedio;
+
     for(i=0;i<tam;i++)
     {
         if(vec[i].estado==0)
@@ -286,22 +350,52 @@ void Listar (eProducto vec[],int tam,eProv prov[],int tamP)
         }
     }
     promedio=suma/acumular;
+    system("pause");
+    system("cls");
     printf("D.\n");
+    printf(" ID DESCRIPCION IMPORTE CANTIDAD PROVEEDOR\n\n");
     for(i=0;i<tam;i++)
     {
-        if(vec[i].Importe>promedio)
+        if(vec[i].Importe>promedio&&vec[i].estado==0)
         {
             mostrarProducto(vec,i);
             printf("\n");
         }
     }
+     system("pause");
+     system("cls");
     printf("E.\n");
-    for(i=0;i<5;i++)
+    printf(" ID DESCRIPCION IMPORTE CANTIDAD PROVEEDOR\n\n");
+    for(i=0;i<tam;i++)
     {
-        if(vec[i].Importe<promedio)
+        if(vec[i].Importe<promedio&&vec[i].estado==0)
         {
+
             mostrarProducto(vec,i);
             printf("\n");
         }
     }
+     system("pause");
+     system("cls");
+     printf("F.\n");
+     printf("ID   NOMBRE\n\n");
+     for(i=0;i<5;i++)
+     {
+         int sumaProv=0;
+
+         for(j=0;j<tam;j++)
+         {
+             if(vec[j].idProv==prov[i].codigoP&&vec[j].estado==0)
+             {
+                 sumaProv=vec[j].cantidad+sumaProv;
+             }
+         }
+         if(sumaProv<=10)
+         {
+
+
+            printf("%d  %s\n",prov[i].codigoP,prov[i].descripcionP);
+
+         }
+     }
 }

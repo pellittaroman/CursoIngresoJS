@@ -5,8 +5,8 @@
 
 int main()
 {
-    eProv proveedores[TAM]={{1111,"tramontina"},{1112,"trotra"},{1113,"filtran"},{1114,"carlson"},{1115,"artox"}};
-    eProducto producto[TAM]={{200,"Mantel",20,100,0,1112},{201,"Mesas",20,100,0,1112},{202,"vasos",23,10,0,1112}};
+    eProv proveedores[TAM]={{11,"tramontina"},{12,"trotra"},{13,"filtran"},{14,"carlson"},{15,"artox"}};
+    eProducto producto[TAM]={{200,"Mortero",20,100,0,12},{201,"Mantel",20,100,0,12},{202,"vasos",23,10,0,12}};
     codigoProducto(producto,TAM);
     iniciar(producto,TAM);
     int i;
@@ -15,8 +15,11 @@ int main()
         producto[i].estado=0;
     }
     int salir=0;
+
+
     do
     {
+
         switch(menu())
     {
         case 1:
