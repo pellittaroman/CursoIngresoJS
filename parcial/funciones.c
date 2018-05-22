@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "libreria.h"
 void codigoProducto(eProducto vec[],int tam)
 {
@@ -19,7 +20,7 @@ void iniciar(eProducto vec[],int tam)
 }
 void alta(eProducto vec[],int tam,eProv prov[],int tamP)
 {
-    int i;
+
     int vacio;
 
     vacio=buscarLugar(vec,tam);
@@ -495,8 +496,7 @@ for(i=0;i<5;i++)
      printf("K.El proveedor que provee el producto mas caro, mostrando ese producto\n\n\n");
      float maximoVal;
      float minimoVal;
-     int minimoProv;
-     int maximoProv;
+
       flag=0;
      for(i=0;i<tam;i++)
      {
@@ -506,12 +506,12 @@ for(i=0;i<5;i++)
              if(maximoVal<vec[i].Importe||flag==0)
              {
                  maximoVal=vec[i].Importe;
-                 maximoProv=vec[i].idProv;
+
              }
              if(vec[i].Importe<minimoVal||flag==0)
                 {
                     minimoVal=vec[i].Importe;
-                    minimoProv=vec[i].idProv;
+
                     flag=1;
                 }
          }
@@ -556,5 +556,32 @@ for(i=0;i<5;i++)
          }
          }
 }
+        system("pause");
+     system("cls");
+        printf("M.consulta recuperatorio");
+        float sumando,totalP;
+        int cantidad;
+
+        for(i=0;i<5;i++)
+        {
+            sumando=0;
+            totalP=0;
+            cantidad=0;
+            printf("%s: ",prov[i].descripcionP);
+            for(j=0;j<tam;j++)
+            {
+                if(vec[j].estado==0)
+                {
+                    if(vec[j].idProv==prov[i].codigoP)
+                    {
+                    sumando=vec[j].Importe+sumando;
+                    cantidad=cantidad+vec[j].cantidad;
+                    }
+                }
+                totalP=sumando*cantidad;
+            }
+            printf("%.2f\n\n",totalP);
+        }
+
 }
 

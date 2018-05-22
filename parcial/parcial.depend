@@ -38,3 +38,43 @@
 	<stdlib.h>
 	"libreria.h"
 
+1526944932 source:c:\users\alumno\desktop\cursoingresojs-master\parcial\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"libreria.h"
+
+1526942610 c:\users\alumno\desktop\cursoingresojs-master\parcial\libreria.h
+
+1526936007 source:c:\users\alumno\desktop\cursoingresojs-master\parcial\listar.c
+	<stdio.h>
+	<stdlib.h>
+	"libreria.h"
+
+1526943955 source:c:\users\alumno\desktop\cursoingresojs-master\parcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	"libreria.h"
+
+1526936007 source:c:\users\alumno\desktop\cursoingresojs-master\parcial\menu.c
+	<stdio.h>
+	<stdlib.h>
+	"libreria.h"
+
+1526936007 source:c:\users\alumno\desktop\pellitta\listar.c
+	<stdio.h>
+	<stdlib.h>
+	"libreria.h"
+
+1526942610 c:\users\alumno\desktop\pellitta\libreria.h
+
+1526943955 source:c:\users\alumno\desktop\pellitta\main.c
+	<stdio.h>
+	<stdlib.h>
+	"libreria.h"
+
+1526936007 source:c:\users\alumno\desktop\pellitta\menu.c
+	<stdio.h>
+	<stdlib.h>
+	"libreria.h"
+

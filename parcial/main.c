@@ -7,7 +7,7 @@
 int main()
 {
     eProv proveedores[TAMP]={{11,"tramontina"},{12,"trotra"},{13,"filtran"},{14,"carlson"},{15,"artox"}};
-    eProducto producto[TAM]={{200,"Mortero",20,100,0,12},{201,"Manoplas",20,100,0,12},{202,"Vasos",23,10,0,12},{203,"Mopas",20,100,0,11}};
+    eProducto producto[TAM]={{200,"Mortero",20,100,0,12},{201,"Manoplas",20,100,0,12},{202,"Vasos",23,10,0,12},{203,"Mopas",19,100,0,11}};
     codigoProducto(producto,TAM);
     iniciar(producto,TAM);
     int i;
